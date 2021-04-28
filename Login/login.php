@@ -24,12 +24,12 @@
                 
                     <div class="form-group">
                         <label>Usuario:</label>
-                        <input type="text" class="form-control" placeholder="Usuario">
+                        <input type="text" class="form-control" id="User" placeholder="Usuario">
                     </div>
                     <br>
                     <div class="form-group">
                         <label>Password:</label>
-                        <input type="password" class="form-control" placeholder="Contrasena">
+                        <input type="password" class="form-control" id="Pass" placeholder="Contrasena">
                     </div>
                     <br>
                     <button id="btnlogear" class="btn btn-black">Inciar</button>

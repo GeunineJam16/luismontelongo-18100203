@@ -1,1 +1,14 @@
 CREATE SCHEMA `montelongoza` ;
+
+CREATE TABLE `montelongoza`.`usuarios` (
+  `id` INT NOT NULL AUTO_INCREMENT,
+  `Nombre` VARCHAR(45) NULL,
+  `Apellido` VARCHAR(45) NULL,
+  `Usuario` VARCHAR(45) NULL,
+  `Password` VARCHAR(45) NULL,
+  PRIMARY KEY (`id`));
+
+INSERT INTO `montelongoza`.`usuarios` (`Nombre`, `Apellido`, `Usuario`, `Password`) VALUES ('Luis', 'Montelongo', 'Luis', '1234');
+INSERT INTO `montelongoza`.`usuarios` (`Nombre`, `Apellido`, `Usuario`, `Password`) VALUES ('Gerardo', 'Pineda', 'Gera', '4321');
+INSERT INTO `montelongoza`.`usuarios` (`Nombre`, `Apellido`, `Usuario`, `Password`) VALUES ('Pepe', 'Chidori', 'Pepe', '2121');
+

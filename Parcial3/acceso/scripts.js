@@ -45,7 +45,7 @@
                         confirmButtonText: "Cerrar"
                     }).then(function(result){
 
-                         window.location = "index.html";
+                         window.location = "Inicio.php";
 
 
                     });

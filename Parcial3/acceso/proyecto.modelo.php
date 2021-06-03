@@ -1,4 +1,5 @@
 <?php
+
  
 require_once "Conexion.php";
 
@@ -18,10 +19,12 @@ class ModeloProyecto{
 
 		if($stmt->execute()){
 
-			return "ok";	
+			$_SESSION['username'] = $User;
+			return "ok";
 
 		}else{
 
+			
 			return "error";
 
 		}
@@ -32,6 +35,17 @@ class ModeloProyecto{
 
 
 
+
+
+
+
+
+
+
+
+
+
+}
 
 
 

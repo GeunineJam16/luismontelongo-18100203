@@ -24,7 +24,7 @@ class ModeloProyecto{
 
 		}else{
 
-			
+			$_SESSION['username'] = null;
 			return "error";
 
 		}
@@ -43,17 +43,5 @@ class ModeloProyecto{
 		$stmt -> close();
 		$stmt = null;
 	}
-
-
-
-
-
-
-
-
-
-
-
-
 
 }

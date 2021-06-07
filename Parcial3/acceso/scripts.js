@@ -1,5 +1,5 @@
 
-    (function($) {
+    $(document).ready(function () {
     "use strict";
 
   
@@ -14,6 +14,7 @@
         e.preventDefault();
         $("body").toggleClass("sb-sidenav-toggled");
     });
+
 
     //cuando se da click en logear checar session
     $("#Logear").on("click", function(e) {
@@ -37,7 +38,7 @@
             dataType: "json",
             success: function(res){
 
-                if(res == "\"ok\""){
+                if(res == "ok"){
 
                     Swal.fire({
                         icon: 'success',
@@ -62,12 +63,63 @@
                
             }//terminar succes del ajax
 
-        });//terminar ajax
-        
-        
-        
+        });//terminar ajax  
+    });
+
+    $("#CerrarSession").on("click", function(e) {
+
+        window.location = "login.html";
+
+    });
+
+    $("#jsGrid").jsGrid({
+        width: "100%",
+        height: "400px",
+        filtering:true,
+        editing: false,
+        delete: false,
+        sorting: true,
+        paging: true,
+        autoload:true,
+        pagesize:10,
+        pageButtonCount:5,
+        DeleteConfirm:"Seguro que quiere eliminar este articulo",
+        controller:{
+
+            loadData: function(filter){
+
+                return $.ajax({
+                    url: 'proyecto.ajax.php',
+                    type: 'POST',
+                    dataType: 'json',
+                    data: {filter: '1'},
+                })
+                .done(function() {
+                    console.log("success");
+                })
+                .fail(function() {
+                    console.log("error");
+                })
+                .always(function() {
+                    console.log("complete");
+                });
+                
+            }
+
+        },
+        fields: [
+            { name: "Descripcion", type: "text", width: 150, validate: "required" },
+            { name: "Marca", type: "text", width: 80 },
+            { name: "UM", type: "text", width: 50 },
+            { name: "Proveedor", type: "text", width: 200 },
+            { name: "TipoArticulo", type: "text", width: 200 },
+            { type: "control" }
+        ]
     });
     
 
 
-})(jQuery);
+
+
+});
+

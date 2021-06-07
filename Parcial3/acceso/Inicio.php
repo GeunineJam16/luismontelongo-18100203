@@ -1,8 +1,18 @@
 <?php
 
 session_start();
+if(isset($_SESSION['username'])){
 
-$user = $_SESSION['username'];
+    $User = $_SESSION['username'];
+
+
+}else{
+
+    header("Location: login.html");
+    
+}
+
+
 
 ?>
 
@@ -14,7 +24,7 @@ $user = $_SESSION['username'];
         <meta name="author" content="" />
         <title>Proyecto</title>
         <link href="css/styles.css" rel="stylesheet" />
-        <link href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" rel="stylesheet" crossorigin="anonymous" />
+
         <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/js/all.min.js" crossorigin="anonymous"></script>
     </head>
     <body class="sb-nav-fixed">
@@ -32,15 +42,8 @@ $user = $_SESSION['username'];
             </form>
             <!-- Navbar-->
             <ul class="navbar-nav ml-auto ml-md-0">
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user fa-fw"></i></a>
-                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                        <a class="dropdown-item" href="#">Ajustes</a>
-                        <a class="dropdown-item" href="#">Ingresos</a>
-                        <div class="dropdown-divider"></div>
-                        <a class="dropdown-item" href="login.html">Cerrar Session</a>
-                    </div>
-                </li>
+                    
+                 <button type="button" id="CerrarSession" class="btn btn-danger" onclick="<?= session_destroy();?>">Cerrar Session</button>
             </ul>
 
         </nav>
@@ -58,11 +61,12 @@ $user = $_SESSION['username'];
                     </div>
                     <div class="sb-sidenav-footer">
                         <div class="small">Session Inciada:</div>
-                        <?php
+                        
+                           <?php
 
-							echo $_SESSION['username'];
+                            echo $_SESSION['username'];
 
-						?>
+                        ?>
 
                         
                     </div>
@@ -155,8 +159,6 @@ $user = $_SESSION['username'];
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         <script src="assets/demo/chart-area-demo.js"></script>
         <script src="assets/demo/chart-bar-demo.js"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js" crossorigin="anonymous"></script>
-        <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js" crossorigin="anonymous"></script>
-        <script src="assets/demo/datatables-demo.js"></script>
+    
     </body>
 

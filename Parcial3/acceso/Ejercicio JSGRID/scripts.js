@@ -37,7 +37,7 @@ $(document).ready(function () {
             dataType: "json",
             success: function(res){
 
-                if(res == "\"ok\""){
+                if(res == "ok"){
 
                     Swal.fire({
                         icon: 'success',
@@ -63,6 +63,12 @@ $(document).ready(function () {
             }//terminar succes del ajax
 
         });//terminar ajax  
+    });
+
+    $("#CerrarSession").on("click", function(e) {
+
+        window.location = "login.html";
+
     });
 
     $("#jsGrid").jsGrid({
@@ -110,5 +116,8 @@ $(document).ready(function () {
         ]
     });
     
+
+
+
 
 });

@@ -24,7 +24,7 @@ class ModeloProyecto{
 
 		}else{
 
-			
+			$_SESSION['username'] = null;
 			return "error";
 
 		}
@@ -33,19 +33,19 @@ class ModeloProyecto{
 		$stmt = null;
 	}
 
+	static public function mdlDataGridArticulos(){
+
+	 $stmt = Conexion::conectar()->prepare("SELECT * FROM montelongoza.articulos");
+
+		$stmt -> execute();
+		return $stmt ->fetchAll();
+		
+		$stmt -> close();
+		$stmt = null;
+	}
 
 
 
-
-
-
-
-
-
-
-
-
-}
 
 
 

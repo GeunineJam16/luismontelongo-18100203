@@ -14,6 +14,12 @@ $(document).ready(function () {
         $("body").toggleClass("sb-sidenav-toggled");
     });
 
+    $("#Articulos").on("click", function(e) {
+
+        window.location = "Articulos.php";
+       
+    });
+
 
     //cuando se da click en logear checar session
     $("#Logear").on("click", function(e) {
@@ -71,12 +77,77 @@ $(document).ready(function () {
 
     });
 
+    $("#GuardarArticulo").on("click", function(e) {
+
+        var CodArticulo             = $("#CodigoArticulo").val();
+        var NombreArti              = $("#NombreArticulo").val();
+        var MarcaArticulo              = $("#MarcaArticulo").val();
+
+        var combo1                  = document.getElementById("selectUM");
+        var selectUM                = combo1.options[combo1.selectedIndex].text;
+
+        var combo2                  = document.getElementById("selectProveedores");
+        var selectProveedores       = combo2.options[combo2.selectedIndex].text;
+
+        var combo3                  = document.getElementById("selectTipodeArticulo");
+        var selectTipodeArticulo    = combo3.options[combo3.selectedIndex].text;
+
+        var datos = new FormData();
+
+        datos.append("CodArticulo",CodArticulo);
+        datos.append("NombreArti",NombreArti);
+        datos.append("MarcaArticulo",MarcaArticulo);
+        datos.append("selectUM",selectUM);
+        datos.append("selectProveedores",selectProveedores);
+        datos.append("selectTipodeArticulo",selectTipodeArticulo);
+
+
+       
+        $.ajax({
+            url:"proyecto.ajax.php",
+            method: "POST",
+            data: datos,
+            cache: true,
+            contentType: false,
+            processData: false,
+            dataType: "json",
+            success: function(res){
+
+                if(res == "ok"){
+
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Se guardaron los datos',
+                        confirmButtonText: "Cerrar"
+                    }).then(function(result){
+
+                         window.location = "Articulos.php";
+
+
+                    });
+                }else{
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'No se guardaron los datos'
+                        
+                    });
+
+                }//termianr else
+
+               
+            }//terminar succes del ajax
+
+        });//terminar ajax  
+
+    });
+
     $("#jsGrid").jsGrid({
         width: "100%",
         height: "400px",
         filtering:true,
         editing: false,
-        delete: false,
+        delete: true,
         sorting: true,
         paging: true,
         autoload:true,
@@ -92,18 +163,16 @@ $(document).ready(function () {
                     type: 'POST',
                     dataType: 'json',
                     data: {filter: '1'},
-                })
-                .done(function() {
-                    console.log("success");
-                })
-                .fail(function() {
-                    console.log("error");
-                })
-                .always(function() {
-                    console.log("complete");
                 });
                 
-            }
+            },
+            deleteItem: function(item){
+               return $.ajax({
+                type: "DELETE",
+                url: "proyecto.ajax.php",
+                data: item
+               });
+              }
 
         },
         fields: [

@@ -1,13 +1,20 @@
 <?php
 
 session_start();
+if(isset($_SESSION['usuario'])){
 
-$user = $_SESSION['username'];
+    echo $_SESSION['usuario'];
 
-echo $user;
-$usuario = 'root';
-$password = '';
-$db = new PDO('mysql:host=localhost;dbname=proyecto', $usuario, $password);
+    $usuario = 'root';
+    $password = '';
+    $db = new PDO('mysql:host=localhost;dbname=montelongoza', $usuario, $password);
+
+
+}else{
+
+    header("Location: login.html");
+    
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -67,7 +74,7 @@ $db = new PDO('mysql:host=localhost;dbname=proyecto', $usuario, $password);
                         <div class="small">Session Inciada:</div>
                         <?php
 
-                            echo $_SESSION['username'];
+                            echo $_SESSION['usuario'];
 
                         ?>
 
@@ -85,7 +92,7 @@ $db = new PDO('mysql:host=localhost;dbname=proyecto', $usuario, $password);
                         </ol>
                         <div class="card mb-4">
                             <div class="card-body">
-                                <button type="button" id="NuevoArticulo" class="btn btn-primary">Nuevo Articulo</button>
+                                <button type="button" id="NuevoArticulo" class="btn btn-primary" data-toggle="modal" data-target="#modalNuevoArticulo">Nuevo Articulo</button>
                             </div>
                         </div>
                         <div class="card mb-4">
@@ -97,6 +104,94 @@ $db = new PDO('mysql:host=localhost;dbname=proyecto', $usuario, $password);
                                 <div id="jsGrid">
                                     
                                 </div id="jsGrid"></div>
+                            </div>
+                            <div id="modalNuevoArticulo" class="modal fade">
+                              <div class="modal-dialog modal-lg">
+                                <div class="modal-content">
+                                  <div class="modal-header">
+                                    <h5 class="modal-title">Ingreso de Articulos</h5>
+                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                  </div>
+                                  <div class="modal-body">
+
+                                     <div class="form-group">
+
+                                        <label>Codigo Del Articulo:</label>
+                                        <input type="email" class="form-control form-control-lg" id="CodigoArticulo">
+                                        
+                                      </div>
+                                      <div class="form-group">
+
+                                        <label>Nombre del Articulo:</label>
+                                        <input type="text" class="form-control form-control-lg" id="NombreArticulo">
+
+                                      </div>
+                                      <div class="form-group">
+
+                                        <label>Marca del Articulo:</label>
+                                        <input type="text" class="form-control form-control-lg" id="MarcaArticulo">
+
+                                      </div>
+                                       <div class="form-group">
+
+                                        <label>UM:</label>
+                                        <select class="form-control form-control-lg" id="selectUM">
+                                          <option value="0">Seleccione:</option>
+                                            <?php
+                                                $query = $db->prepare("SELECT * FROM montelongoza.cat_unidadmedidad");
+                                                $query->execute();
+                                                $data = $query->fetchAll();
+
+                                                foreach ($data as $valores):
+                                                    echo '<option value="'.$valores["id"].'">'.$valores["Abreviado"].'</option>';
+                                                endforeach;
+                                            ?>
+                                        </select>
+
+                                      </div>
+                                      <div class="form-group">
+
+                                        <label>Proveedores:</label>
+                                        <select class="form-control form-control-lg" id="selectProveedores">
+                                         <option value="0">Seleccione:</option>
+                                            <?php
+                                                $query = $db->prepare("SELECT * FROM montelongoza.p_proveedores");
+                                                $query->execute();
+                                                $data = $query->fetchAll();
+
+                                                foreach ($data as $valores):
+                                                    echo '<option value="'.$valores["id"].'">'.$valores["Nombre"].'</option>';
+                                                endforeach;
+                                            ?>
+                                        </select>
+
+                                      </div>
+                                      <div class="form-group">
+
+                                        <label>Tipo de Articulo:</label>
+                                        <select class="form-control form-control-lg" id="selectTipodeArticulo">
+                                          <option value="0">Seleccione:</option>
+                                            <?php
+                                                $query = $db->prepare("SELECT * FROM montelongoza.cat_tipoarticulos");
+                                                $query->execute();
+                                                $data = $query->fetchAll();
+
+                                                foreach ($data as $valores):
+                                                    echo '<option value="'.$valores["id"].'">'.$valores["TipoArticulo"].'</option>';
+                                                endforeach;
+                                            ?>
+                                        </select>
+                                        </select>
+
+                                      </div>
+                                  </div>
+                                  <div class="modal-footer">
+                                    
+                                    <button type="button" class="btn btn-primary" id="GuardarArticulo">Guardar</button>
+
+                                  </div>
+                                </div>
+                              </div>
                             </div>
                         </div>
                     </div>
@@ -110,6 +205,7 @@ $db = new PDO('mysql:host=localhost;dbname=proyecto', $usuario, $password);
         </div>
          
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10"></script>
         <script type = "text/javascript" src = "https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js" > </script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         <script src="js/scripts.js"></script>

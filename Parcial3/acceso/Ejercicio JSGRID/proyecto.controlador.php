@@ -8,10 +8,9 @@ class ControladorProyecto{
 		
 		$respuesta = ModeloProyecto::mdlValidarSession($User,$Pass);
 
-		return json_encode($respuesta);
+		return $respuesta;
 	}
 
-	//datos de datagrid articulos
 	static public function ctrDataGridArticulos(){
 		
 		$respuesta = ModeloProyecto::mdlDataGridArticulos();
@@ -32,6 +31,24 @@ class ControladorProyecto{
 		}
 
 		return json_encode($output);
+	}
+
+	//guardado de la infomacion de articulos
+	static public function ctrGuardarArticulo($CodArticulo,$NombreArti,$MarcaArticulo,$selectUM,$selectProveedores,$selectTipodeArticulo){
+		
+		$respuesta = ModeloProyecto::mdlGuardarArticulo($CodArticulo,$NombreArti,$MarcaArticulo,$selectUM,$selectProveedores,$selectTipodeArticulo);
+
+
+		return $respuesta;
+	}
+
+	//Eliminacion de la infomacion de articulos
+	static public function ctrDataGridArticulosEliminar($query){
+		
+		$respuesta = ModeloProyecto::DataGridArticulosEliminar($query);
+
+		var_dump($respuesta);
+		return $respuesta;
 	}
 
 

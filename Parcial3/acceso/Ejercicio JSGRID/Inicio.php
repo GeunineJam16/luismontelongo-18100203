@@ -1,9 +1,9 @@
 <?php
 
 session_start();
-if(isset($_SESSION['username'])){
+if(isset($_SESSION['usuario'])){
 
-    $User = $_SESSION['username'];
+    echo $_SESSION['usuario'];
 
 
 }else{
@@ -12,10 +12,9 @@ if(isset($_SESSION['username'])){
     
 }
 
-
-
 ?>
 
+ 
     <head>
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -29,7 +28,7 @@ if(isset($_SESSION['username'])){
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
-            <a class="navbar-brand" href="index.html">TERE</a>
+            <a class="navbar-brand" href="Inicio.php">TERE</a>
             <button class="btn btn-link btn-sm order-1 order-lg-0" id="sidebarToggle" href="#"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
             <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
@@ -43,7 +42,7 @@ if(isset($_SESSION['username'])){
             <!-- Navbar-->
             <ul class="navbar-nav ml-auto ml-md-0">
                     
-                 <button type="button" id="CerrarSession" class="btn btn-danger" onclick="<?= session_destroy();?>">Cerrar Session</button>
+                 <button type="button" id="CerrarSession" class="btn btn-danger" >Cerrar Session</button>
             </ul>
 
         </nav>
@@ -53,7 +52,7 @@ if(isset($_SESSION['username'])){
                     <div class="sb-sidenav-menu">
                         <div class="nav">
                             <div class="sb-sidenav-menu-heading">Incio</div>
-                            <a class="nav-link" href="index.html">
+                            <a class="nav-link" href="Inicio.php">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
                                 Ingreso de Datos
                             </a>
@@ -64,7 +63,7 @@ if(isset($_SESSION['username'])){
                         
                            <?php
 
-                            echo $_SESSION['username'];
+                            echo $_SESSION['usuario'];
 
                         ?>
 
@@ -161,6 +160,3 @@ if(isset($_SESSION['username'])){
         <script src="assets/demo/chart-bar-demo.js"></script>
     
     </body>
-
-
-
